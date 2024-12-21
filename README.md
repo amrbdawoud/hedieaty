@@ -1,12 +1,3 @@
-## Getting Started
+## Hedieaty
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Hedieaty is a gift list management app designed to simplify the process of creating, managing, and sharing wish lists for special occasions such as birthdays, weddings, engagements, graduations, and holidays. The app provides users with a seamless experience through features like gift addition via barcode scanning, flexible list management, and cloud sharing for easy collaboration with friends and family. Built using Flutter, the app is accessible on Amazon App Store.
