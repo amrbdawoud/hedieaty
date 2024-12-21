@@ -145,6 +145,14 @@ class HomeScreen extends StatelessWidget {
                                         );
                                       },
                                     ),
+                                      SizedBox(height: 30),
+                                Text(
+                                  'Friends:',
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).primaryColor,
+                                  ),),
                                   ],
                                 ),
                               ),
