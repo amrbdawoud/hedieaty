@@ -31,7 +31,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 48),
               Text(
-                'Welcome to Hedieaty',
+                'Hedieaty',
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
@@ -47,7 +47,7 @@ class WelcomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 // Subtitle
                 Text(
-                  'Your journey starts here. Join us and explore endless possibilities!',
+                  'The only gift list management app you need!',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey[600],

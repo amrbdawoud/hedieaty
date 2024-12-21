@@ -293,7 +293,8 @@ class WishlistScreen extends StatelessWidget {
                         ),
                         onPressed: () {
                           if (selectedEventId != null) {
-                            viewModel.pledgeGift(gift.id, selectedEventId!);
+                            viewModel.pledgeGift(gift.id, selectedEventId!, );
+                            Navigator.pop(context);
                             Navigator.pop(context);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(

@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hedieaty/home/edit_event_screen/edit_event_screen.dart';
 import 'package:hedieaty/home/edit_event_screen/edit_event_viewmodel.dart';
@@ -5,6 +6,7 @@ import 'package:hedieaty/home/home_screen/home_screen.dart';
 import 'package:hedieaty/home/my_wishlists_screen/my_wishlists_screen.dart';
 import 'package:hedieaty/home/profile_screen/profile_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:hedieaty/notification_manager/notification_manager.dart';
 
 import 'my_events_screen/my_events_screen.dart';
 import 'my_events_screen/my_events_viewmodel.dart';
@@ -26,6 +28,32 @@ class _BaseTabScreenState extends State<BaseTabScreen> {
       _selectedIndex = index;
     });
   }
+
+  @override
+  void initState() {
+    super.initState();
+    NotificationManager.instance.configure().then((_) {
+      _requestNotificationPermission();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    NotificationManager.instance.dispose();
+  }
+
+  void _requestNotificationPermission() async {
+    NotificationSettings settings =
+    await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );}
 
   // List of pages corresponding to the bottom navigation items
   final List<Widget> _pages = [

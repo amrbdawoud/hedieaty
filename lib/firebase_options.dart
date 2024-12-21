@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '638961409210',
     projectId: 'hedieaty-flutter-app',
     storageBucket: 'hedieaty-flutter-app.firebasestorage.app',
-    iosBundleId: 'com.example.hedieaty',
+    iosBundleId: 'com.amr.hedieaty',
   );
 
 }

@@ -1,4 +1,4 @@
-package com.example.hedieaty
+package com.amr.hedieaty
 
 import io.flutter.embedding.android.FlutterActivity
 

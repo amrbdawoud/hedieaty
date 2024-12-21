@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hedieaty/home/data/wishlists/models/gift.dart';
 import 'package:hedieaty/onboarding/managers/user_session_manager.dart';
 
+import '../../../notification_manager/notification_manager.dart';
 import '../../data/wishlists/models/wishlist.dart';
 import '../../data/wishlists/wishlists_fs_manager.dart';
 import '../../data/events/events_fs_manager.dart';
@@ -63,6 +64,12 @@ class WishlistViewModel extends ChangeNotifier {
       pledgedGift.eventId = eventId;
 
       await _wishlistManager.updateGiftInWishlist(_wishlist.id, _wishlist.gifts.indexOf(pledgedGift), pledgedGift);
+
+      await NotificationManager.instance.sendNotification(
+          wishlist.userId,
+          "YAY! YOUR GIFT WAS PLEDGED!",
+          "OPEN THE APP AND CHECK YOUR PLEDGED APP");
+
 
       _isLoading = false;
       notifyListeners();
