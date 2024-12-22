@@ -67,8 +67,8 @@ class WishlistViewModel extends ChangeNotifier {
 
       await NotificationManager.instance.sendNotification(
           wishlist.userId,
-          "YAY! YOUR GIFT WAS PLEDGED!",
-          "OPEN THE APP AND CHECK YOUR PLEDGED APP");
+          "Your gift has been pledged!",
+          "Your gift has been pledged by a friend, Come and see your gift!");
 
 
       _isLoading = false;

@@ -291,9 +291,9 @@ class WishlistScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           if (selectedEventId != null) {
-                            viewModel.pledgeGift(gift.id, selectedEventId!, );
+                            viewModel.pledgeGift(gift.id, selectedEventId!);
                             Navigator.pop(context);
                             Navigator.pop(context);
                           } else {
