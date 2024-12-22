@@ -53,7 +53,7 @@ class _CreateNewWishlistScreenState extends State<CreateNewWishlistScreen> {
 
 
       final response = await _dio.get(
-          "https://api.barcodelookup.com/v3/products?barcode=${result.rawContent}&formatted=y&key=nnbpuqi1qv0criduxsh7rm26zk1raw");
+          "https://api.barcodelookup.com/v3/products?barcode=${result.rawContent}&formatted=y&key=w1lotk73y4uac4yysgkrcs9k4730s1");
 
       if (response.statusCode == 200) {
         print(response);

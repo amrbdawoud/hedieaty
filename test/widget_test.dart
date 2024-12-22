@@ -1,30 +1,34 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:hedieaty/main.dart';
+import 'package:hedieaty/home/data/wishlists/models/wishlist.dart';
+import 'package:hedieaty/home/data/wishlists/models/gift.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const HedieatyApp());
+  group('Hedieaty App Tests', () {
+    testWidgets('App should render welcome screen initially', (tester) async {
+      await tester.pumpWidget(const HedieatyApp());
+      expect(find.text('Welcome to Hedieaty'), findsOneWidget);
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    test('Wishlist model validation', () {
+      final wishlist = Wishlist(
+          id: 'test-id',
+          userId: 'user-id',
+          name: 'Test Wishlist',
+          gifts: [
+            Gift(
+                id: 'gift-id',
+                name: 'Test Gift',
+                description: 'Test Description',
+                price: 100,
+                category: 'Electronics'
+            )
+          ]
+      );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      expect(wishlist.name, equals('Test Wishlist'));
+      expect(wishlist.gifts.length, equals(1));
+    });
   });
 }
