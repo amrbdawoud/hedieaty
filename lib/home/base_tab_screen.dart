@@ -32,8 +32,73 @@ class _BaseTabScreenState extends State<BaseTabScreen> {
   @override
   void initState() {
     super.initState();
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print("Received a new notification.");
+      if (message.notification != null) {
+        // Show a snack notification
+        _showTopSnackBar(message.notification!.title ?? "Notification",
+            message.notification!.body ?? "You have a new message.");
+      }
+    });
     NotificationManager.instance.configure().then((_) {
       _requestNotificationPermission();
+    });
+  }
+
+  void _showTopSnackBar(String title, String message) {
+    final overlay = Overlay.of(context);
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: MediaQuery.of(context).padding.top + 16.0, // Add padding for status bar
+        left: 16.0,
+        right: 16.0,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.blueAccent,
+              borderRadius: BorderRadius.circular(8.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10.0,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                Text(
+                  message,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    overlay?.insert(overlayEntry);
+
+    // Automatically remove the notification after 4 seconds
+    Future.delayed(Duration(seconds: 10), () {
+      overlayEntry.remove();
     });
   }
 

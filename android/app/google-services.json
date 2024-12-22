@@ -7,9 +7,28 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:936575104498:android:b1d505040991f21f29276b",
+        "mobilesdk_app_id": "1:936575104498:android:6dffb73b631261df29276b",
         "android_client_info": {
           "package_name": "com.amr.hedieaty"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxx9GnKs52qEpZeqqtPWXGaeZcZoIdo4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936575104498:android:b1d505040991f21f29276b",
+        "android_client_info": {
+          "package_name": "com.example.hedieaty"
         }
       },
       "oauth_client": [],

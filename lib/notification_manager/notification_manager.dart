@@ -42,7 +42,7 @@ class NotificationManager {
     };
 
     // Define the API endpoint
-    String apiUrl = 'http://192.168.1.6:3000/send-notification';
+    String apiUrl = 'http://172.26.128.1:3000/send-notification';
 
     // Prepare the data
     Map<String, dynamic> data = {
