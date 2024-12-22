@@ -47,17 +47,21 @@ class _CreateNewWishlistScreenState extends State<CreateNewWishlistScreen> {
 
     try {
       var result = await BarcodeScanner.scan();
+      print("ragnar");
       print(result.rawContent);
+
+
 
       final response = await _dio.get(
           "https://api.barcodelookup.com/v3/products?barcode=${result.rawContent}&formatted=y&key=nnbpuqi1qv0criduxsh7rm26zk1raw");
 
       if (response.statusCode == 200) {
+        print(response);
         // Successfully fetched data
         setState(() {
-          Map<String, dynamic> map = jsonDecode(response.data);
+          Map<String, dynamic> map = jsonDecode(response.toString());
 
-          BarcodeDetails details = BarcodeDetails.fromJson(map);
+          BarcodeDetails details = BarcodeDetails.fromJson(map["products"][0]);
 
           GiftController scannedGiftController = GiftController();
           scannedGiftController.nameController.text = details.name;

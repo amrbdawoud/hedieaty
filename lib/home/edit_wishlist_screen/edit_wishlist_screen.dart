@@ -1,11 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:barcode_scan2/platform_wrapper.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:hedieaty/home/data/wishlists/models/gift.dart';
 import 'package:hedieaty/home/data/wishlists/models/wishlist.dart';
 import 'package:hedieaty/home/data/wishlists/wishlists_fs_manager.dart';
 import 'package:uuid/uuid.dart';
+import '../data/barcode_details.dart';
 import 'edit_wishlist_viewmodel.dart';
 
 class EditWishlistScreen extends StatefulWidget {
@@ -48,6 +51,53 @@ class _EditWishlistScreenState extends State<EditWishlistScreen> {
     setState(() {
       _giftControllers.removeAt(index);
     });
+  }
+
+  Future<void> _scanBarcode() async {
+    final Dio _dio = Dio();
+
+    try {
+      var result = await BarcodeScanner.scan();
+      print("ragnar");
+      print(result.rawContent);
+
+
+
+      final response = await _dio.get(
+          "https://api.barcodelookup.com/v3/products?barcode=${result.rawContent}&formatted=y&key=nnbpuqi1qv0criduxsh7rm26zk1raw");
+
+      if (response.statusCode == 200) {
+        print(response);
+        // Successfully fetched data
+        setState(() {
+          Map<String, dynamic> map = jsonDecode(response.toString());
+
+          BarcodeDetails details = BarcodeDetails.fromJson(map["products"][0]);
+
+          GiftController scannedGiftController = GiftController();
+          scannedGiftController.nameController.text = details.name;
+          scannedGiftController.descriptionController.text =
+              details.description;
+          scannedGiftController.priceController.text = details.price.toString();
+          scannedGiftController.selectedCategory =
+          categories.any((c) => c == details.category)
+              ? details.category
+              : 'Electronics';
+
+          setState(() {
+            _giftControllers.add(scannedGiftController);
+          });
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Barcode Product not Found!')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error Scanning the BarCode!')),
+      );
+    }
   }
 
   Widget _buildGiftForm(int index) {
@@ -338,6 +388,11 @@ class _EditWishlistScreenState extends State<EditWishlistScreen> {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: _scanBarcode,
+                child: const Text('Scan Barcode for Gift'),
               ),
               const SizedBox(height: 24),
               ElevatedButton(
